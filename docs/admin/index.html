@@ -12,7 +12,7 @@
   /* Estilo Profe para el CMS: papel, tinta y terracota, Fraunces + Space Grotesk.
      Todo va por variables --sui-* (la API de theming de Sveltia): si una actualización
      cambia un nombre, ese detalle vuelve al look por defecto y nada se rompe. */
-  :root {
+  body {
     --sui-font-family-default: "Space Grotesk", system-ui, sans-serif;
 
     --sui-primary-accent-color: #c8502e;
@@ -37,7 +37,7 @@
     --sui-button-secondary-border-color: transparent;
     --sui-button-medium-border-radius: 999px;
   }
-  h1, h2, h3 { font-family: Fraunces, Georgia, serif; }
+  h1, h2, h3 { font-family: Fraunces, Georgia, serif !important; }
   .powered-by { display: none !important; }
 </style>
 </head>
