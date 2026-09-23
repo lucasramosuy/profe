@@ -6,7 +6,7 @@ Sitio de materiales de clase de Lucas Ramos. Se publica como sitio estático; si
 
 | Archivo | Qué es |
 | --- | --- |
-| `docs/index.html` | La página pública. HTML/CSS/JS en un solo archivo. Carga `materiales.json` y muestra los materiales agrupados por curso, con buscador. Tipografías: Fraunces y Space Grotesk. |
+| `docs/index.html` | La página pública. HTML/CSS/JS en un solo archivo. Carga `materiales.json` y muestra los materiales agrupados por curso, con buscador. Tipografías: Fraunces y Space Grotesk, servidas desde `docs/fonts/` (archivos de Fontsource; sin Google Fonts). |
 | `docs/materiales.json` | La lista de materiales. Se edita desde el panel (Pages CMS); no editar a mano. |
 | `docs/archivos/` | PDFs y otros archivos subidos desde el panel. |
 | `.pages.yml` | Configuración de Pages CMS (qué campos tiene cada material). |
