@@ -6,12 +6,10 @@ Sitio de materiales de clase de Lucas Ramos. Se publica como sitio estático; si
 
 | Archivo | Qué es |
 | --- | --- |
-| `docs/index.html` | La página pública. HTML/CSS/JS en un solo archivo. Carga `materiales.json` y muestra los materiales agrupados por curso, con buscador. Tipografías: Fraunces y Space Grotesk (Google Fonts). |
-| `docs/materiales.json` | La lista de materiales. Se edita solo desde el CMS; no editar a mano. |
-| `docs/admin/` | Panel de administración (Sveltia CMS). Está en `/profe/admin`. |
-| `docs/archivos/` | PDFs y otros archivos subidos desde el CMS. |
-
-El resto del repo (src/, public/, astro.config.mjs, etc.) es la plantilla vieja de AstroPaper, en desuso. No se publica.
+| `docs/index.html` | La página pública. HTML/CSS/JS en un solo archivo. Carga `materiales.json` y muestra los materiales agrupados por curso, con buscador. Tipografías: Fraunces y Space Grotesk. |
+| `docs/materiales.json` | La lista de materiales. Se edita desde el panel (Pages CMS); no editar a mano. |
+| `docs/archivos/` | PDFs y otros archivos subidos desde el panel. |
+| `.pages.yml` | Configuración de Pages CMS (qué campos tiene cada material). |
 
 ## Publicación
 
@@ -21,9 +19,9 @@ El resto del repo (src/, public/, astro.config.mjs, etc.) es la plantilla vieja 
 
 ## Cómo subir un material
 
-1. Entrá a `https://lucasramos.uy/profe/admin/` e iniciá sesión con "Sign In with Token" (un personal access token de GitHub con acceso a este repo).
+1. Entrá a https://app.pagescms.org/ con tu cuenta de GitHub y abrí el proyecto `lucasramosuy/profe`.
 2. En **Materiales**, agregá un item: título, curso, descripción, archivo y fecha.
-3. Guardá. El CMS hace commit a `prod` y el sitio se republica solo en ~1 minuto.
+3. Guardá. Pages CMS hace commit a `prod` y el sitio se republica solo en ~1 minuto.
 
 ## Notas
 
