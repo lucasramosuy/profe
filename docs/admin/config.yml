@@ -2,7 +2,11 @@ backend:
   name: github
   repo: lucasramosuy/profe
   branch: prod
-  # Sign in with the "Sign In with Token" button (GitHub PAT with repo scope).
+  # Login solo con token de GitHub (PAT con permiso Contents sobre este repo).
+  # El botón OAuth "Sign In with GitHub" pasa por Netlify, por eso se apaga.
+  auth_methods: [token]
+app_title: Profe. Lucas
+logo_url: /profe/logo-profe.svg
 site_url: https://lucasramos.uy/profe/
 media_folder: docs/archivos
 public_folder: archivos
