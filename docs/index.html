@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Profe — Lucas Ramos</title>
+<meta name="description" content="Materiales de clase de Lucas Ramos: apuntes, trípticos, presentaciones y guías para descargar.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,600&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#f7f1e6;
+  --paper-deep:#f0e6d4;
+  --ink:#241b12;
+  --ink-soft:#5c5044;
+  --terracotta:#c8502e;
+  --terracotta-deep:#a83e20;
+  --peach:#f3dcc8;
+  --chalk:#2e2a24;
+  --line:#ddd0ba;
+  --mustard:#e3a72f;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:"Space Grotesk",system-ui,sans-serif;font-size:17px;line-height:1.55}
+.wrap{max-width:1060px;margin:0 auto;padding:0 28px}
+a{color:inherit;text-decoration:none}
+
+header{border-bottom:1.5px solid var(--line);background:var(--paper)}
+.nav{display:flex;align-items:center;justify-content:space-between;padding:18px 0}
+.brand{font-family:Fraunces,serif;font-weight:700;font-size:22px;letter-spacing:-.01em}
+.brand em{font-style:italic;color:var(--terracotta)}
+.nav-links{display:flex;gap:26px;font-size:15px;font-weight:500;align-items:center}
+.nav-links a{border-bottom:2px solid transparent;padding-bottom:2px}
+.nav-links a:hover{color:var(--terracotta)}
+.pill{background:var(--chalk);color:var(--paper);border-radius:999px;padding:8px 18px;font-size:14px;font-weight:500}
+.pill:hover{background:var(--terracotta)}
+
+.hero{padding:84px 0 64px;border-bottom:1.5px solid var(--line);position:relative;overflow:hidden}
+.hero-grid{display:grid;grid-template-columns:1.25fr .85fr;gap:48px;align-items:end;position:relative;z-index:1}
+.kicker{display:inline-block;font-size:13px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--terracotta);border:1.5px solid var(--terracotta);border-radius:999px;padding:6px 14px;margin-bottom:26px}
+h1{font-family:Fraunces,serif;font-weight:600;font-size:64px;line-height:1.04;letter-spacing:-.02em}
+h1 em{font-style:italic;color:var(--terracotta)}
+.hero p.lede{font-size:19px;color:var(--ink-soft);max-width:38ch}
+.squiggle{position:absolute;right:-46px;top:16px;width:170px;opacity:.75}
+
+.search{display:flex;align-items:center;gap:12px;margin:44px 0 8px;border:1.5px solid var(--line);background:#fff;border-radius:14px;padding:14px 18px}
+.search svg{flex:none}
+.search input{border:0;outline:0;font:inherit;width:100%;background:transparent;color:var(--ink)}
+.search input::placeholder{color:#a2937f}
+
+section.course{padding:38px 0 10px}
+.course-head{display:flex;align-items:baseline;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:12px;margin-bottom:6px}
+.course-head h2{font-family:Fraunces,serif;font-weight:600;font-size:30px;letter-spacing:-.01em}
+.course-head .count{font-size:14px;color:var(--ink-soft)}
+.doc{display:flex;align-items:center;gap:18px;padding:18px 6px;border-bottom:1.5px solid var(--line)}
+.doc:hover{background:var(--paper-deep)}
+.badge{flex:none;width:52px;height:52px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;letter-spacing:.04em;color:#fff}
+.badge.pdf{background:var(--terracotta)}
+.badge.doc,.badge.docx{background:#3e6fb0}
+.badge.ppt,.badge.pptx{background:var(--mustard);color:var(--ink)}
+.badge.otro{background:#8a7c68}
+.doc .txt{flex:1;min-width:0}
+.doc .t{font-weight:500;font-size:17.5px}
+.doc .m{font-size:13.5px;color:var(--ink-soft);margin-top:2px}
+.doc .dl{margin-left:auto;flex:none;font-size:14px;font-weight:500;color:var(--terracotta);border:1.5px solid var(--terracotta);border-radius:999px;padding:7px 16px}
+.doc .dl:hover{background:var(--terracotta);color:#fff}
+
+.vacio{padding:64px 0 48px;text-align:center;color:var(--ink-soft)}
+.vacio .big{font-family:Fraunces,serif;font-size:30px;font-weight:600;color:var(--ink);margin-bottom:10px}
+.vacio code{background:var(--peach);border-radius:6px;padding:2px 8px;font-size:14px}
+
+.band{margin:64px 0 0;background:var(--chalk);color:var(--paper);padding:56px 0}
+.band-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:44px;align-items:center}
+.band h3{font-family:Fraunces,serif;font-weight:600;font-size:34px;letter-spacing:-.01em;margin-bottom:14px}
+.band h3 em{font-style:italic;color:var(--mustard)}
+.band p{color:#cfc6b8;max-width:52ch}
+.btn{display:inline-block;margin-top:24px;background:var(--terracotta);color:#fff;font-weight:600;font-size:15px;border-radius:999px;padding:12px 26px}
+.btn:hover{background:var(--terracotta-deep)}
+
+footer{padding:34px 0 44px;background:var(--chalk);color:#a99f8d;font-size:14px}
+.foot{display:flex;justify-content:space-between;align-items:center;border-top:1.5px solid #494236;padding-top:24px}
+.foot a:hover{color:var(--paper)}
+.foot .links{display:flex;gap:22px}
+
+.hidden{display:none}
+
+@media (max-width:760px){
+  h1{font-size:42px}
+  .hero{padding:56px 0 44px}
+  .hero-grid,.band-grid{grid-template-columns:1fr;gap:24px}
+  .squiggle{width:100px;top:-14px;right:-16px;opacity:.5}
+  .nav-links{gap:16px;font-size:14px}
+  .nav-links a.hide-m{display:none}
+  .course-head{flex-direction:column;align-items:flex-start;gap:2px}
+  .doc{gap:12px;flex-wrap:wrap}
+  .doc .dl{flex-basis:100%;margin-left:0;text-align:center;padding:9px 12px;font-size:14px}
+  .foot{flex-direction:column;gap:14px;text-align:center}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <div class="brand">Profe<em>.</em> Lucas</div>
+    <nav class="nav-links">
+      <a href="#materiales">Materiales</a>
+      <a href="#cursos" class="hide-m">Cursos</a>
+      <a href="https://lucasramos.uy/normativa/contacto/" class="hide-m">Contacto</a>
+      <a href="https://lucasramos.uy/" class="pill">lucasramos.uy ↗</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <div class="hero">
+    <svg class="squiggle" viewBox="0 0 200 200" fill="none" aria-hidden="true">
+      <circle cx="100" cy="100" r="88" stroke="#c8502e" stroke-width="3" stroke-dasharray="10 12"/>
+      <path d="M52 108c14-34 30-34 44 0s30 34 44 0" stroke="#e3a72f" stroke-width="4" stroke-linecap="round"/>
+    </svg>
+    <div class="hero-grid">
+      <div>
+        <span class="kicker">Materiales de clase</span>
+        <h1>Apuntes y recursos,<br><em>en un solo lugar.</em></h1>
+      </div>
+      <div>
+        <p class="lede">Los materiales que uso en clase: apuntes, trípticos, presentaciones y guías. Todo listo para descargar o imprimir.</p>
+      </div>
+    </div>
+
+    <div class="search" id="materiales">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#a2937f" stroke-width="2.4" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <input id="buscar" placeholder="Buscar por tema, curso o tipo de material…">
+    </div>
+  </div>
+
+  <div id="cursos"></div>
+
+  <div class="vacio hidden" id="vacio">
+    <div class="big">Todavía no hay materiales publicados.</div>
+    <p>En cuanto suba el primero desde el panel (<code>/profe/admin</code>), aparece acá automáticamente.</p>
+  </div>
+
+  <div class="vacio hidden" id="sin-resultados">
+    <div class="big">Nada coincide con esa búsqueda.</div>
+    <p>Probá con otra palabra o revisá el curso directamente.</p>
+  </div>
+
+</div>
+
+<section class="band">
+  <div class="wrap band-grid">
+    <div>
+      <h3>¿Sos estudiante o colega? <em>Llevatelos.</em></h3>
+      <p>Todos los materiales son de uso libre para estudiar y enseñar. Si algo te sirve en tu clase, descargalo y adaptalo; si encontrás un error, escribime y lo corrijo.</p>
+      <a class="btn" href="https://lucasramos.uy/normativa/contacto/">Escribirme →</a>
+    </div>
+    <div>
+      <p style="font-size:14px;color:#a99f8d">Cómo se mantiene este sitio</p>
+      <p style="margin-top:10px">Subo un archivo y se publica solo. Sin paneles raros: cada material nuevo aparece acá en un minuto, con su fecha y su curso.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot">
+    <div>© 2026 Lucas Ramos · Profe</div>
+    <div class="links">
+      <a href="https://lucasramos.uy/">lucasramos.uy</a>
+      <a href="https://lucasramos.uy/normativa/">Normativa Uruguay</a>
+      <a href="https://lucasramos.uy/normativa/contacto/">Contacto</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+const MESES = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','setiembre','octubre','noviembre','diciembre'];
+
+function fmtFecha(iso){
+  const d = new Date(iso + (iso.length === 10 ? 'T12:00:00' : ''));
+  if (isNaN(d)) return '';
+  return `${d.getDate()} de ${MESES[d.getMonth()]} de ${d.getFullYear()}`;
+}
+function tipoDe(archivo){
+  const ext = (archivo.split('.').pop() || '').toLowerCase();
+  if (ext === 'pdf') return 'pdf';
+  if (ext === 'doc' || ext === 'docx' || ext === 'odt') return 'doc';
+  if (ext === 'ppt' || ext === 'pptx' || ext === 'odp') return 'ppt';
+  return 'otro';
+}
+function badgeTxt(t){ return t === 'doc' ? 'DOC' : t === 'ppt' ? 'PPT' : t === 'pdf' ? 'PDF' : 'ADJ'; }
+
+let MATS = [];
+
+function render(filtro){
+  const q = (filtro || '').trim().toLowerCase();
+  const cont = document.getElementById('cursos');
+  cont.innerHTML = '';
+  const grupos = {};
+  for (const m of MATS){
+    if (q){
+      const texto = `${m.titulo} ${m.curso} ${m.descripcion || ''}`.toLowerCase();
+      if (!texto.includes(q)) continue;
+    }
+    (grupos[m.curso] = grupos[m.curso] || []).push(m);
+  }
+  const cursos = Object.keys(grupos);
+  document.getElementById('vacio').classList.toggle('hidden', MATS.length !== 0);
+  document.getElementById('sin-resultados').classList.toggle('hidden', !(MATS.length && !cursos.length));
+  for (const curso of cursos){
+    const docs = grupos[curso].slice().sort((a,b) => (b.fecha || '').localeCompare(a.fecha || ''));
+    const sec = document.createElement('section');
+    sec.className = 'course';
+    sec.innerHTML = `<div class="course-head"><h2></h2><span class="count">${docs.length} documento${docs.length === 1 ? '' : 's'}</span></div>`;
+    sec.querySelector('h2').textContent = curso;
+    for (const m of docs){
+      const t = tipoDe(m.archivo);
+      const a = document.createElement('a');
+      a.className = 'doc';
+      a.href = m.archivo;
+      const meta = [m.descripcion, m.fecha ? 'Actualizado el ' + fmtFecha(m.fecha) : ''].filter(Boolean).join(' · ');
+      a.innerHTML = `<span class="badge ${t}">${badgeTxt(t)}</span>
+        <span class="txt"><span class="t"></span><div class="m"></div></span>
+        <span class="dl">Descargar ↓</span>`;
+      a.querySelector('.t').textContent = m.titulo;
+      a.querySelector('.m').textContent = meta;
+      sec.appendChild(a);
+    }
+    cont.appendChild(sec);
+  }
+}
+
+fetch('./materiales.json', {cache: 'no-store'})
+  .then(r => r.ok ? r.json() : {materiales: []})
+  .then(d => { MATS = Array.isArray(d) ? d : (d.materiales || []); render(''); })
+  .catch(() => { MATS = []; render(''); });
+
+document.getElementById('buscar').addEventListener('input', e => render(e.target.value));
+</script>
+
+</body>
+</html>
