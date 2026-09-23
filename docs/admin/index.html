@@ -5,8 +5,39 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Admin · Profe. Lucas</title>
 <meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,600&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
-  /* Oculta el "Powered by Sveltia CMS" del login. Si Sveltia cambia la clase en una actualización, el texto simplemente vuelve a aparecer. */
+  /* Estilo Profe para el CMS: papel, tinta y terracota, Fraunces + Space Grotesk.
+     Todo va por variables --sui-* (la API de theming de Sveltia): si una actualización
+     cambia un nombre, ese detalle vuelve al look por defecto y nada se rompe. */
+  :root {
+    --sui-font-family-default: "Space Grotesk", system-ui, sans-serif;
+
+    --sui-primary-accent-color: #c8502e;
+    --sui-primary-accent-color-dark: #a83e20;
+    --sui-primary-accent-color-light: #f0cfc2;
+    --sui-primary-accent-color-text: #ffffff;
+    --sui-primary-accent-color-inverted: #f7f1e6;
+    --sui-primary-accent-color-translucent: rgba(200, 80, 46, 0.2);
+
+    --sui-primary-background-color: #f7f1e6;
+    --sui-secondary-background-color: #f0e7d4;
+
+    /* Botón secundario: el "Sign In Using Access Token" del login */
+    --sui-button-secondary-background-color: #c8502e;
+    --sui-button-secondary-background-color-focus: #b8481f;
+    --sui-button-secondary-background-color-active: #a83e20;
+    --sui-button-secondary-background-color-pressed: #a83e20;
+    --sui-button-secondary-foreground-color: #f7f1e6;
+    --sui-button-secondary-foreground-color-focus: #f7f1e6;
+    --sui-button-secondary-foreground-color-active: #f7f1e6;
+    --sui-button-secondary-foreground-color-pressed: #f7f1e6;
+    --sui-button-secondary-border-color: transparent;
+    --sui-button-medium-border-radius: 999px;
+  }
+  h1, h2, h3 { font-family: Fraunces, Georgia, serif; }
   .powered-by { display: none !important; }
 </style>
 </head>
