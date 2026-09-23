@@ -1,0 +1,32 @@
+backend:
+  name: github
+  repo: lucasramosuy/profe
+  branch: prod
+  # Sign in with the "Sign In with Token" button (GitHub PAT with repo scope).
+site_url: https://lucasramos.uy/profe/
+media_folder: docs/archivos
+public_folder: archivos
+collections:
+  - name: contenido
+    label: Contenido
+    files:
+      - name: materiales
+        label: Materiales
+        file: docs/materiales.json
+        fields:
+          - label: Materiales
+            name: materiales
+            label_singular: Material
+            widget: list
+            summary: "{{fields.titulo}}"
+            fields:
+              - {label: Título, name: titulo, widget: string}
+              - {label: Curso, name: curso, widget: string, hint: "Ej.: Derecho, Formación docente"}
+              - {label: Descripción, name: descripcion, widget: string, required: false}
+              - {label: Archivo, name: archivo, widget: file}
+              - label: Fecha
+                name: fecha
+                widget: datetime
+                time_format: false
+                date_format: YYYY-MM-DD
+                format: YYYY-MM-DD
