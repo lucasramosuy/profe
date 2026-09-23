@@ -1,30 +1,40 @@
+# Pages CMS (https://pagescms.org) - panel de edición de Profe.
 media:
-  input: public
-  output: /
+  input: docs/archivos
+  output: /profe/archivos
+
 content:
-  - name: posts
-    label: Posts
-    type: collection
-    path: src/content/blog
-    view:
-      fields: [ title, draft, date ]
-    fields:
-      - { name: author, label: Author, type: string }
-      - { name: pubDatetime, label: Date, type: date }
-      - { name: modDatetime, label: Date, type: date }
-      - { name: title, label: Title, type: string, required: true }
-      - { name: ogImage, label: Title, type: string }
-      - { name: slug, label: Slug, type: string }
-      - { name: featured, label: Featured, type: boolean }
-      - { name: draft, label: Draft, type: boolean }
-      - { name: tags, label: Tags, type: string, list: true }
-      - { name: description, label: Description, type: string }
-      - { name: body, label: Body, type: rich-text }
-  - name: about
-    label: About page
+  - name: materiales
+    label: Materiales
     type: file
-    path: src/pages/about.md
+    path: docs/materiales.json
+    format: json
     fields:
-      - { name: layout, type: string, hidden: true, default: "../layouts/AboutLayout.astro" }
-      - { name: title, label: Title, type: string }
-      - { name: body, label: Body, type: rich-text, options: { input: public/assets, output: /assets } }
+      - name: materiales
+        label: Materiales
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{titulo}"
+        fields:
+          - name: titulo
+            label: Título
+            type: string
+            required: true
+          - name: curso
+            label: Curso
+            type: string
+            required: true
+          - name: descripcion
+            label: Descripción
+            type: string
+          - name: archivo
+            label: Archivo
+            type: file
+            required: true
+          - name: fecha
+            label: Fecha
+            type: date
+            options:
+              format: yyyy-MM-dd
