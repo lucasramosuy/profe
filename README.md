@@ -16,6 +16,7 @@ Sitio de materiales de clase de Lucas Ramos. Se publica como sitio estático; si
 - **Producción:** https://lucasramos.uy/profe/ (vía Cloudflare Worker, que redirige `/profe/*` al upstream de este sitio).
 - La rama que se publica es `prod`, carpeta `docs/`.
 - Cada commit a `prod` republica el sitio en ~1 minuto.
+- La rama `dev` tiene la plantilla vieja (AstroPaper); la que se publica es `prod`.
 
 ## Cómo subir un material
 
@@ -25,5 +26,6 @@ Sitio de materiales de clase de Lucas Ramos. Se publica como sitio estático; si
 
 ## Notas
 
+- Contacto: los links van al formulario único de https://lucasramos.uy/contacto/?tema=profe (repo `www`).
 - No cargar materiales reales todavía (pedido de Lucas, 23-sep-2026).
 - Los subdominios profe.lucasramos.uy (Netlify, plantilla vieja) y docs.lucasramos.uy (Mintlify) quedan como están hasta que Lucas confirme el nuevo sitio; después redirigen acá.
