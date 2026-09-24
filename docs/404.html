@@ -3,15 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Lucas</title>
-<meta name="description" content="Materiales de clase de Lucas: apuntes, trípticos, presentaciones y guías para descargar.">
-<link rel="canonical" href="https://lucasramos.uy/profe/">
+<title>Página no encontrada</title>
+<meta name="robots" content="noindex">
 <link rel="icon" href="/profe/favicon.svg" type="image/svg+xml">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Profe · Lucas">
-<meta property="og:description" content="Materiales de clase de Lucas: apuntes, trípticos, presentaciones y guías para descargar.">
-<meta property="og:url" content="https://lucasramos.uy/profe/">
-<meta name="twitter:card" content="summary">
 <style>
 @font-face {font-family: 'Fraunces'; font-style: normal; font-display: swap; font-weight: 600; src: url(/profe/fonts/fraunces-latin-ext-600-normal.woff2) format('woff2'); unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}
 @font-face {font-family: 'Fraunces'; font-style: normal; font-display: swap; font-weight: 600; src: url(/profe/fonts/fraunces-latin-600-normal.woff2) format('woff2'); unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
@@ -134,56 +128,19 @@ footer{padding:34px 0 44px;background:var(--chalk);color:#a99f8d;font-size:14px}
 </header>
 
 <main class="wrap">
-
   <div class="hero">
-    <svg class="squiggle" viewBox="0 0 200 200" fill="none" aria-hidden="true">
-      <circle cx="100" cy="100" r="88" stroke="#c8502e" stroke-width="3" stroke-dasharray="10 12"/>
-      <path d="M52 108c14-34 30-34 44 0s30 34 44 0" stroke="#e3a72f" stroke-width="4" stroke-linecap="round"/>
-    </svg>
     <div class="hero-grid">
       <div>
-        <span class="kicker">Materiales de clase</span>
-        <h1>Apuntes y recursos,<br><em>en un solo lugar.</em></h1>
+        <span class="kicker">Error 404</span>
+        <h1>Esta página<br><em>no existe.</em></h1>
       </div>
       <div>
-        <p class="lede">Los materiales que uso en clase: apuntes, trípticos, presentaciones y guías. Todo listo para descargar o imprimir.</p>
+        <p class="lede">Puede que el enlace esté mal escrito o que el material se haya movido.</p>
+        <p style="margin-top:22px"><a class="btn" href="/profe/">Ir a los materiales →</a></p>
       </div>
     </div>
-
-    <div class="search" id="materiales">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#8a7b67" aria-hidden="true" stroke-width="2.4" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
-      <label for="buscar" class="sr-only">Buscar materiales</label>
-      <input id="buscar" type="search" placeholder="Buscar por tema, curso o tipo de material…">
-    </div>
   </div>
-
-  <div id="cursos"></div>
-
-  <div class="vacio hidden" id="vacio">
-    <div class="big">Todavía no hay materiales publicados.</div>
-    <p>En cuanto suba el primero desde el panel de edición, aparece acá automáticamente.</p>
-  </div>
-
-  <div class="vacio hidden" id="sin-resultados">
-    <div class="big">Nada coincide con esa búsqueda.</div>
-    <p>Probá con otra palabra o revisá el curso directamente.</p>
-  </div>
-
 </main>
-
-<section class="band">
-  <div class="wrap band-grid">
-    <div>
-      <h2>¿Sos estudiante o colega? <em>Llevatelos.</em></h2>
-      <p>Todos los materiales son de uso libre para estudiar y enseñar. Si algo te sirve en tu clase, descargalo y adaptalo; si encontrás un error, escribime y lo corrijo.</p>
-      <a class="btn" href="https://lucasramos.uy/contacto/?tema=profe">Escribirme →</a>
-    </div>
-    <div>
-      <p style="font-size:14px;color:#a99f8d">Cómo se mantiene este sitio</p>
-      <p style="margin-top:10px">Subo un archivo y se publica solo. Sin paneles raros: cada material nuevo aparece acá en un minuto, con su fecha y su curso.</p>
-    </div>
-  </div>
-</section>
 
 <footer>
   <div class="wrap foot">
@@ -195,71 +152,6 @@ footer{padding:34px 0 44px;background:var(--chalk);color:#a99f8d;font-size:14px}
     </div>
   </div>
 </footer>
-
-<script>
-const MESES = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','setiembre','octubre','noviembre','diciembre'];
-
-function fmtFecha(iso){
-  const d = new Date(iso + (iso.length === 10 ? 'T12:00:00' : ''));
-  if (isNaN(d)) return '';
-  return `${d.getDate()} de ${MESES[d.getMonth()]} de ${d.getFullYear()}`;
-}
-function tipoDe(archivo){
-  const ext = (archivo.split('.').pop() || '').toLowerCase();
-  if (ext === 'pdf') return 'pdf';
-  if (ext === 'doc' || ext === 'docx' || ext === 'odt') return 'doc';
-  if (ext === 'ppt' || ext === 'pptx' || ext === 'odp') return 'ppt';
-  return 'otro';
-}
-function badgeTxt(t){ return t === 'doc' ? 'DOC' : t === 'ppt' ? 'PPT' : t === 'pdf' ? 'PDF' : 'ADJ'; }
-
-let MATS = [];
-
-function render(filtro){
-  const q = (filtro || '').trim().toLowerCase();
-  const cont = document.getElementById('cursos');
-  cont.innerHTML = '';
-  const grupos = {};
-  for (const m of MATS){
-    if (q){
-      const texto = `${m.titulo} ${m.curso} ${m.descripcion || ''}`.toLowerCase();
-      if (!texto.includes(q)) continue;
-    }
-    (grupos[m.curso] = grupos[m.curso] || []).push(m);
-  }
-  const cursos = Object.keys(grupos);
-  document.getElementById('vacio').classList.toggle('hidden', MATS.length !== 0);
-  document.getElementById('sin-resultados').classList.toggle('hidden', !(MATS.length && !cursos.length));
-  for (const curso of cursos){
-    const docs = grupos[curso].slice().sort((a,b) => (b.fecha || '').localeCompare(a.fecha || ''));
-    const sec = document.createElement('section');
-    sec.className = 'course';
-    sec.innerHTML = `<div class="course-head"><h2></h2><span class="count">${docs.length} documento${docs.length === 1 ? '' : 's'}</span></div>`;
-    sec.querySelector('h2').textContent = curso;
-    for (const m of docs){
-      const t = tipoDe(m.archivo);
-      const a = document.createElement('a');
-      a.className = 'doc';
-      a.href = m.archivo;
-      const meta = [m.descripcion, m.fecha ? 'Actualizado el ' + fmtFecha(m.fecha) : ''].filter(Boolean).join(' · ');
-      a.innerHTML = `<span class="badge ${t}">${badgeTxt(t)}</span>
-        <span class="txt"><span class="t"></span><div class="m"></div></span>
-        <span class="dl">Descargar ↓</span>`;
-      a.querySelector('.t').textContent = m.titulo;
-      a.querySelector('.m').textContent = meta;
-      sec.appendChild(a);
-    }
-    cont.appendChild(sec);
-  }
-}
-
-fetch('./materiales.json', {cache: 'no-store'})
-  .then(r => r.ok ? r.json() : {materiales: []})
-  .then(d => { MATS = Array.isArray(d) ? d : (d.materiales || []); render(''); })
-  .catch(() => { MATS = []; render(''); });
-
-document.getElementById('buscar').addEventListener('input', e => render(e.target.value));
-</script>
 
 </body>
 </html>

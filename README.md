@@ -1,6 +1,6 @@
 # profe · lucasramos.uy/profe
 
-Sitio de materiales de clase de Lucas Ramos. Se publica como sitio estático; sin build ni dependencias.
+Sitio de materiales de clase de Lucas. Se publica como sitio estático; sin build ni dependencias.
 
 ## Estructura
 
