@@ -8,6 +8,8 @@ Sitio de materiales de clase de Lucas. Se publica como sitio estático; sin buil
 | --- | --- |
 | `docs/index.html` | La página pública. HTML/CSS/JS en un solo archivo. Carga `materiales.json` y muestra los materiales agrupados por curso, con buscador. Tipografías: Fraunces y Space Grotesk, servidas desde `docs/fonts/` (archivos de Fontsource; sin Google Fonts). |
 | `docs/materiales.json` | La lista de materiales. Se edita desde el panel (Pages CMS); no editar a mano. |
+| `docs/blog/` | El blog: listado (`index.html`) y detalle (`post.html`). Lee `blog.json` con JS y lo renderiza (parser de markdown chico, propio; sin dependencias). |
+| `docs/blog.json` | Las entradas del blog. Se editan desde el panel (Pages CMS); no editar a mano. |
 | `docs/archivos/` | PDFs y otros archivos subidos desde el panel. |
 | `.pages.yml` | Configuración de Pages CMS (qué campos tiene cada material). |
 
@@ -17,6 +19,12 @@ Sitio de materiales de clase de Lucas. Se publica como sitio estático; sin buil
 - La rama que se publica es `prod`, carpeta `docs/`.
 - Cada commit a `prod` republica el sitio en ~1 minuto.
 - La rama `dev` tiene la plantilla vieja (AstroPaper); la que se publica es `prod`.
+
+## Cómo escribir una entrada del blog
+
+1. Entrá a https://app.pagescms.org/ y abrí el proyecto `lucasramosuy/profe`.
+2. En **Blog**, agregá una entrada: título, fecha, descripción, etiquetas (separadas por comas) y cuerpo. El cuerpo es texto con formato: negrita, títulos, listas, citas, links e **imágenes** (el botón de imagen las sube a `docs/archivos/`).
+3. Guardá. La entrada aparece en https://lucasramos.uy/profe/blog/ en ~1 minuto.
 
 ## Cómo subir un material
 
