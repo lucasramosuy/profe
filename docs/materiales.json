@@ -1,1 +1,11 @@
-{"materiales": []}
+{
+  "materiales": [
+    {
+      "titulo": "test",
+      "curso": "test",
+      "descripcion": "test",
+      "archivo": "/profe/archivos/Guia-Normas-APA-7ma-edicion.pdf",
+      "fecha": "2026-09-27"
+    }
+  ]
+}
