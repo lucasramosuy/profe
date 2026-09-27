@@ -38,3 +38,37 @@ content:
             type: date
             options:
               format: yyyy-MM-dd
+  - name: blog
+    label: Blog
+    type: file
+    path: docs/blog.json
+    format: json
+    fields:
+      - name: posts
+        label: Entradas
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{titulo}"
+        fields:
+          - name: titulo
+            label: Título
+            type: string
+            required: true
+          - name: fecha
+            label: Fecha
+            type: date
+            options:
+              format: yyyy-MM-dd
+          - name: descripcion
+            label: Descripción
+            type: string
+          - name: etiquetas
+            label: Etiquetas
+            type: string
+            description: "Separadas por comas (ej: clase, simuladores)"
+          - name: cuerpo
+            label: Cuerpo
+            type: rich-text
+            required: true
