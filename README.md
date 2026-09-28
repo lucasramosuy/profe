@@ -11,6 +11,8 @@ Sitio de materiales de clase de Lucas. Se publica como sitio estático; sin buil
 | `docs/blog/` | El blog: listado (`index.html`) y detalle (`post.html`). Lee `blog.json` con JS y lo renderiza (parser de markdown chico, propio; sin dependencias). |
 | `docs/blog.json` | Las entradas del blog. Se editan desde el panel (Pages CMS); no editar a mano. |
 | `docs/archivos/` | PDFs y otros archivos subidos desde el panel. |
+| `docs/fotos/` | Buscador de fotos para materiales (Unsplash vía el Worker `profe-fotos`, ver `worker/README.md`). |
+| `worker/` | Worker `profe-fotos` (`fotos.js` + `wrangler.fotos.toml`): proxy de la API de Unsplash para `/profe/fotos/api/*`. |
 | `.pages.yml` | Campos y botones de Pages CMS. |
 | `.github/workflows/acciones-cms.yml` | Acciones manuales y aviso automático al guardar materiales. |
 | `scripts/acciones_cms.py` | Validación, optimización, Telegram y conversión a PDF. |
@@ -38,7 +40,7 @@ Sitio de materiales de clase de Lucas. Se publica como sitio estático; sin buil
 
 - Contacto: los links van al formulario único de https://lucasramos.uy/contacto/?tema=profe (repo `www`).
 - No cargar materiales reales todavía (pedido de Lucas, 23-sep-2026).
-- Los subdominios profe.lucasramos.uy (Netlify, plantilla vieja) y docs.lucasramos.uy (Mintlify) quedan como están hasta que Lucas confirme el nuevo sitio; después redirigen acá.
+- Los subdominios viejos profe.lucasramos.uy y docs.lucasramos.uy ya no existen; todo el sitio vive bajo `lucasramos.uy/profe/`.
 
 ## Acciones del panel
 
