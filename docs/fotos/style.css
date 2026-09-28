@@ -9,4 +9,4 @@
 @media(max-width:700px){.site .useactions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.site .useactions a{grid-column:1/-1}.site .useactions a,.site .useactions button{padding:10px 8px}.site .gallery{grid-template-columns:1fr}.site .photopick{height:340px}.site .photocard:first-child .photopick{height:340px}}
 
 /* Sin descripción: la card queda foto + crédito. */
-.site .usephoto small{display:block;margin-top:6px}unces
+.site .usephoto small{display:block;margin-top:6px}
