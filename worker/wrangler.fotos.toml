@@ -1,0 +1,6 @@
+name = "profe-fotos"
+main = "fotos.js"
+compatibility_date = "2026-09-27"
+workers_dev = false
+routes = [{ pattern = "lucasramos.uy/profe/fotos/api/*", zone_name = "lucasramos.uy" }]
+# Configurar UNSPLASH_ACCESS_KEY como secreto de este Worker desde Cloudflare Dashboard.
