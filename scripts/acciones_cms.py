@@ -197,10 +197,17 @@ def printable(title):
     target = Path(os.environ.get('RUNNER_TEMP', '/tmp')) / 'profe-imprimible.pdf'
     ext = src.suffix.lower()
     if ext == '.pdf':
+        if src.read_bytes()[:5] != b'%PDF-':
+            raise ValueError('El archivo no es un PDF válido')
         shutil.copyfile(src, target)
     elif ext in ('.jpg', '.jpeg', '.png', '.webp'):
         with Image.open(src) as img:
-            if img.mode not in ('RGB', 'L'):
+            if img.mode in ('RGBA', 'LA') or 'transparency' in img.info:
+                rgba = img.convert('RGBA')
+                white = Image.new('RGB', rgba.size, 'white')
+                white.paste(rgba, mask=rgba.getchannel('A'))
+                img = white
+            elif img.mode not in ('RGB', 'L'):
                 img = img.convert('RGB')
             img.save(target, 'PDF', resolution=150)
     elif ext in ('.doc', '.docx', '.odt', '.ppt', '.pptx', '.odp'):
