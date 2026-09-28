@@ -7,3 +7,9 @@
 .site .status{font-size:14px;color:var(--muted);margin:14px 0 25px;line-height:1.5}.site .status[hidden],.site [hidden]{display:none!important}
 .site .gallery{align-items:start}.site .photopick img{object-fit:cover}.site .photocaption a:hover,.site .creditline a:hover{text-decoration-thickness:2px}.site .pagination{text-align:center;margin:35px 0 0}.site .pagination button{background:transparent;color:var(--ink);border:1px solid var(--ink);padding:13px 20px;min-height:45px;font-weight:600}.site .pagination button:disabled{opacity:.45;cursor:wait}.site .solid.secondary{background:var(--terra);border-color:var(--terra)}.site .solid.secondary:hover{background:#893820}.site .useactions{flex-wrap:wrap}.site .useactions a,.site .useactions button{white-space:nowrap}.site .photocaption a{text-decoration:underline}.site .photopick{display:block}.site .photochosen{font-size:11px}.site .photocaption strong{line-height:1.35}
 @media(max-width:700px){.site .useactions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.site .useactions a{grid-column:1/-1}.site .useactions a,.site .useactions button{padding:10px 8px}.site .gallery{grid-template-columns:1fr}.site .photopick{height:340px}.site .photocard:first-child .photopick{height:340px}}
+
+/* Caption recortado a una línea: la descripción completa queda en el tooltip (title). */
+.site .photocaption>div{min-width:0}
+.site .photocaption strong{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.site .usephoto{min-width:0}
+.site .usephoto strong{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
