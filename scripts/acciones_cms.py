@@ -210,7 +210,12 @@ def printable(title):
             elif img.mode not in ('RGB', 'L'):
                 img = img.convert('RGB')
             img.save(target, 'PDF', resolution=150)
-    elif ext in ('.doc', '.docx', '.odt', '.ppt', '.pptx', '.odp'):
+    elif ext in ('.docx', '.odt', '.txt', '.md'):
+        from imprimible import render
+        pages = render(src, target, str(matches[0].get('titulo') or ''),
+                       str(matches[0].get('curso') or ''), str(matches[0].get('descripcion') or ''))
+        summary(f'Plantilla homogénea sin logo aplicada a {pages} página(s).')
+    elif ext in ('.doc', '.ppt', '.pptx', '.odp'):
         subprocess.run(['sudo', 'apt-get', 'update', '-qq'], check=True)
         subprocess.run(['sudo', 'apt-get', 'install', '-y', '-qq', 'libreoffice-writer', 'libreoffice-impress'], check=True)
         with tempfile.TemporaryDirectory() as directory:
