@@ -40,8 +40,6 @@
     });
     $('chosen').hidden = false;
     $('chosen-number').textContent = `FOTO ELEGIDA · ${String(index + 1).padStart(2,'0')}`;
-    $('chosen-title').textContent = selected.description || 'Foto para clase';
-    $('chosen-title').title = selected.description || '';
     $('chosen-credit').textContent = `${selected.user.name} / Unsplash`;
     external($('chosen-original'), safeLink(selected.links.html, 'unsplash.com'));
     $('copy-photo').textContent = 'Copiar enlace';
@@ -59,14 +57,10 @@
     const chosen = node('span','photochosen','Seleccionada ✓'); chosen.hidden = true; pick.append(chosen);
     pick.addEventListener('click', () => showSelected(index));
     const caption = node('div','photocaption'), text = node('div');
-    const title = photo.description || photo.alt_description || 'Foto para clase';
-    const heading = node('strong','',title);
-    if (photo.description || photo.alt_description) heading.title = title;
-    text.append(heading);
     const author = node('a','',photo.user.name); external(author, profile);
     const source = node('a','', 'Unsplash ↗'); external(source, 'https://unsplash.com/?utm_source=profe_lucas&utm_medium=referral');
     const credit = node('div','credit-links'); credit.append(author, document.createTextNode(' / '), source); text.append(credit);
-    const arrow = node('button','selectarrow','↗'); arrow.type = 'button'; arrow.setAttribute('aria-label',`Seleccionar ${title}`); arrow.addEventListener('click', () => showSelected(index));
+    const arrow = node('button','selectarrow','↗'); arrow.type = 'button'; arrow.setAttribute('aria-label',`Seleccionar foto ${index + 1} de ${photo.user.name}`); arrow.addEventListener('click', () => showSelected(index));
     caption.append(text,arrow); card.append(pick,caption); gallery.append(card);
   }
   function render() {
