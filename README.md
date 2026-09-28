@@ -11,7 +11,9 @@ Sitio de materiales de clase de Lucas. Se publica como sitio estático; sin buil
 | `docs/blog/` | El blog: listado (`index.html`) y detalle (`post.html`). Lee `blog.json` con JS y lo renderiza (parser de markdown chico, propio; sin dependencias). |
 | `docs/blog.json` | Las entradas del blog. Se editan desde el panel (Pages CMS); no editar a mano. |
 | `docs/archivos/` | PDFs y otros archivos subidos desde el panel. |
-| `.pages.yml` | Configuración de Pages CMS (qué campos tiene cada material). |
+| `.pages.yml` | Campos y botones de Pages CMS. |
+| `.github/workflows/acciones-cms.yml` | Acciones manuales y aviso automático al guardar materiales. |
+| `scripts/acciones_cms.py` | Validación, optimización, Telegram y conversión a PDF. |
 
 ## Publicación
 
@@ -37,3 +39,14 @@ Sitio de materiales de clase de Lucas. Se publica como sitio estático; sin buil
 - Contacto: los links van al formulario único de https://lucasramos.uy/contacto/?tema=profe (repo `www`).
 - No cargar materiales reales todavía (pedido de Lucas, 23-sep-2026).
 - Los subdominios profe.lucasramos.uy (Netlify, plantilla vieja) y docs.lucasramos.uy (Mintlify) quedan como están hasta que Lucas confirme el nuevo sitio; después redirigen acá.
+
+## Acciones del panel
+
+En Pages CMS, con la rama `prod` abierta, los cuatro botones aparecen en la barra del proyecto:
+
+- **Validar enlaces de materiales:** revisa URLs de `archivo` y enlaces de la descripción; deja los fallos en el resumen del run de GitHub Actions. Un servidor que bloquee comprobaciones automáticas puede dar un falso positivo.
+- **Optimizar imágenes:** reescribe solo PNG/JPEG/WebP de `docs/archivos/` cuando el archivo nuevo pesa menos, sin pérdida visible. Abre un PR para revisar y fusionar; nunca escribe directamente en `prod`. Si no hay ahorros, no abre PR.
+- **Enviar resumen a Telegram:** envía la lista actual al chat del bot. Además, al agregar materiales a `docs/materiales.json` en `prod`, el aviso sale solo una vez por commit; editar materiales existentes no envía nada. Antes de habilitarlo, configurar los *secrets* del repositorio `TELEGRAM_TOKEN` (mismo token del bot de resoluciones) y `TELEGRAM_CHAT_ID` (ID del chat privado de Lucas). No pegar esos valores en el YAML.
+- **Generar imprimible PDF:** pide el título exacto de un material ya guardado. Copia PDF, convierte imágenes o DOC/PPT a PDF y lo deja como artefacto descargable del run por 7 días. Otros formatos muestran un error claro; no se añade nada al sitio ni se envía a terceros.
+
+GitHub Actions tiene que estar habilitado. Pages CMS necesita permiso de Actions para lanzar botones; para el PR de imágenes, el repositorio tiene que permitir a GitHub Actions crear pull requests. Los botones son manuales y el aviso automático corre solo con cambios en materiales. Todo usa las cuotas gratuitas de un repo público.

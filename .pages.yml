@@ -72,3 +72,35 @@ content:
             label: Cuerpo
             type: rich-text
             required: true
+
+# Acciones manuales de Pages CMS (el aviso a Telegram también sale al guardar).
+actions:
+  - name: validar-enlaces
+    label: Validar enlaces de materiales
+    workflow: acciones-cms.yml
+    ref: current
+  - name: optimizar-imagenes
+    label: Optimizar imágenes
+    workflow: acciones-cms.yml
+    ref: current
+    confirm:
+      title: ¿Optimizar imágenes?
+      message: Revisará docs/archivos y abrirá un PR solo si hay ahorros.
+      button: Optimizar
+  - name: aviso-telegram
+    label: Enviar resumen a Telegram
+    workflow: acciones-cms.yml
+    ref: current
+    confirm:
+      title: ¿Enviar aviso?
+      message: Enviará a tu bot el resumen de los materiales publicados.
+      button: Enviar
+  - name: imprimible
+    label: Generar imprimible PDF
+    workflow: acciones-cms.yml
+    ref: current
+    fields:
+      - name: titulo
+        label: Título exacto del material
+        type: text
+        required: true
