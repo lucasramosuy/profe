@@ -30,6 +30,7 @@ jobs:
         with:
           python-version: '3.12'
       - name: Instalar librería de imágenes
+        if: github.event_name == 'workflow_dispatch'
         run: python -m pip install 'Pillow==11.3.0'
       - name: Ejecutar acción
         id: accion
