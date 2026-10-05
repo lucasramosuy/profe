@@ -39,10 +39,8 @@ header{border-bottom:1.5px solid var(--line);background:var(--paper)}
 .brand{font-family:'Space Grotesk',system-ui,sans-serif;font-weight:700;font-size:32px;letter-spacing:-2px;line-height:1;white-space:nowrap}
 .brand span{color:#bb5943}
 .nav-links{display:flex;gap:26px;font-size:15px;font-weight:500;align-items:center}
-.nav-links a{border-bottom:2px solid transparent;padding-top:3px;padding-bottom:2px}
-.nav-links a:hover{color:var(--terracotta)}
-.pill{background:var(--chalk);color:var(--paper);border-radius:999px;padding:8px 18px;font-size:14px;font-weight:500;white-space:nowrap;flex:none}
-.pill:hover{background:var(--terracotta)}
+.nav-links a{border-bottom:2px solid transparent;padding-top:3px;padding-bottom:2px}@media (hover:hover){.nav-links a:hover{color:var(--terracotta)}}
+.pill{background:var(--chalk);color:var(--paper);border-radius:999px;padding:8px 18px;font-size:14px;font-weight:500;white-space:nowrap;flex:none}@media (hover:hover){.pill:hover{background:var(--terracotta)}}
 main.wrap{flex:1;width:100%}
 .kicker{display:inline-block;font-size:13px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--terracotta-deep);border:1.5px solid var(--terracotta-deep);border-radius:999px;padding:6px 14px}
 .tag{display:inline-block;font-size:12.5px;font-weight:600;letter-spacing:.04em;color:var(--terracotta-deep);border:1.5px solid var(--terracotta);border-radius:999px;padding:3px 10px;margin:0 6px 6px 0}
@@ -50,8 +48,7 @@ main.wrap{flex:1;width:100%}
 .vacio .big{font-family:Fraunces,serif;font-size:30px;font-weight:600;color:var(--ink);margin-bottom:10px}
 .hidden{display:none}
 footer{padding:34px 0 44px;background:var(--chalk);color:#a99f8d;font-size:14px}
-.foot{display:flex;justify-content:space-between;align-items:center;border-top:1.5px solid #494236;padding-top:24px}
-.foot a:hover{color:var(--paper)}
+.foot{display:flex;justify-content:space-between;align-items:center;border-top:1.5px solid #494236;padding-top:24px}@media (hover:hover){.foot a:hover{color:var(--paper)}}
 .foot .links{display:flex;gap:22px}
 .foot .links a{display:inline-block;padding:4px 0}
 :focus-visible{outline:2px solid var(--terracotta-deep);outline-offset:3px;border-radius:4px}
@@ -64,8 +61,7 @@ footer{padding:34px 0 44px;background:var(--chalk);color:#a99f8d;font-size:14px}
 }
 
 .post-head{padding:56px 0 34px;border-bottom:1.5px solid var(--line)}
-.volver{display:inline-block;font-size:14.5px;font-weight:500;color:var(--ink-soft);margin-bottom:30px}
-.volver:hover{color:var(--terracotta)}
+.volver{display:inline-block;font-size:14.5px;font-weight:500;color:var(--ink-soft);margin-bottom:30px}@media (hover:hover){.volver:hover{color:var(--terracotta)}}
 .post-head .kicker{display:table}
 h1{font-family:Fraunces,serif;font-weight:600;font-size:clamp(32px,6vw,48px);line-height:1.1;letter-spacing:-.02em;margin-top:24px}
 h1 em{font-style:italic;color:var(--terracotta)}
@@ -75,8 +71,7 @@ h1 em{font-style:italic;color:var(--terracotta)}
 .prose p{margin:0 0 22px}
 .prose h2{font-family:Fraunces,serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:42px 0 14px}
 .prose h3{font-family:Fraunces,serif;font-weight:600;font-size:23px;margin:34px 0 10px}
-.prose a{color:var(--terracotta-deep);border-bottom:1.5px solid var(--terracotta)}
-.prose a:hover{color:var(--terracotta)}
+.prose a{color:var(--terracotta-deep);border-bottom:1.5px solid var(--terracotta)}@media (hover:hover){.prose a:hover{color:var(--terracotta)}}
 .prose ul,.prose ol{margin:0 0 22px 22px}
 .prose li{margin-bottom:8px}
 .prose li::marker{color:var(--terracotta)}
@@ -90,6 +85,15 @@ h1 em{font-style:italic;color:var(--terracotta)}
   .post-head{padding:38px 0 26px}
   .prose{font-size:17px}
   .prose h2{font-size:25px}
+}
+
+@media (pointer:coarse){
+  .brand{display:inline-flex;align-items:center;min-height:44px}
+  .nav-links a{display:inline-flex;align-items:center;min-height:44px;padding-top:0;padding-bottom:0}
+  .pill{display:inline-flex;align-items:center;min-height:44px}
+  .search{min-height:44px}
+  .search input{font-size:16px;min-height:44px}
+  .foot a,footer a{display:inline-flex;align-items:center;min-height:44px}
 }
 </style>
 </head>
