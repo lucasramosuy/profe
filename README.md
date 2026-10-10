@@ -16,6 +16,8 @@ Sitio de materiales de clase de Lucas. Se publica como sitio estático; sin buil
 | `.pages.yml` | Campos y botones de Pages CMS. |
 | `.github/workflows/acciones-cms.yml` | Acciones manuales y aviso automático al guardar materiales. |
 | `scripts/acciones_cms.py` | Validación, optimización, Telegram y conversión a PDF. |
+| `scripts/videos_yt.py` | Actualiza los últimos 6 videos del canal de YouTube y descarga miniaturas locales. Sin API key ni dependencias. |
+| `.github/workflows/videos.yml` | Actualiza videos y miniaturas cada 6 horas o a pedido; commitea los cambios a `prod`. |
 
 ## Publicación
 
