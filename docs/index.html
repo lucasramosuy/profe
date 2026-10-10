@@ -97,6 +97,20 @@ footer{padding:34px 0 44px;background:var(--chalk);color:#a99f8d;font-size:14px}
 
 .hidden{display:none}
 
+section.videos{padding:38px 0 10px}
+.vgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:22px}
+.vcard{display:flex;flex-direction:column;gap:10px;min-width:0}
+.vthumb{position:relative;display:block;width:100%;aspect-ratio:16/9;border:1.5px solid var(--line);border-radius:12px;overflow:hidden;background:var(--chalk);padding:0;cursor:pointer;font:inherit}
+.vthumb img,.vthumb iframe{position:absolute;inset:0;width:100%;height:100%;border:0;object-fit:cover}
+.vplay{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:56px;height:56px;border-radius:50%;background:var(--terracotta-deep);color:#fff;display:flex;align-items:center;justify-content:center}
+@media (hover:hover){.vthumb:hover .vplay{background:var(--terracotta)}}
+.vcard .t{font-weight:500;font-size:16.5px;line-height:1.3}
+.vcard .m{font-size:13.5px;color:var(--ink-soft)}
+.vmore{display:inline-flex;align-items:center;min-height:44px;margin-top:14px;font-size:14px;font-weight:500;color:var(--terracotta);border:1.5px solid var(--terracotta);border-radius:999px;padding:0 18px}
+@media (hover:hover){.vmore:hover{background:var(--terracotta);color:#fff}}
+@media (max-width:900px){.vgrid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:560px){.vgrid{grid-template-columns:1fr}}
+
 @media (max-width:760px){
   h1{font-size:42px}
   .hero{padding:56px 0 44px}
@@ -164,6 +178,12 @@ footer{padding:34px 0 44px;background:var(--chalk);color:#a99f8d;font-size:14px}
   </div>
 
   <div id="cursos"></div>
+
+  <section class="videos hidden" id="videos" aria-labelledby="videos-t">
+    <div class="course-head"><h2 id="videos-t">Videos</h2><span class="count">Del canal de YouTube</span></div>
+    <div class="vgrid" id="vgrid"></div>
+    <a class="vmore" id="vcanal" href="https://www.youtube.com/@profe.lucasramosuy" rel="noopener">Ver el canal →</a>
+  </section>
 
   <div class="vacio hidden" id="vacio">
     <div class="big">Todavía no hay materiales publicados.</div>
@@ -263,6 +283,36 @@ fetch('./materiales.json', {cache: 'no-store'})
   .then(r => r.ok ? r.json() : {materiales: []})
   .then(d => { MATS = Array.isArray(d) ? d : (d.materiales || []); render(''); })
   .catch(() => { MATS = []; render(''); });
+
+fetch('./videos.json', {cache: 'no-store'})
+  .then(r => r.ok ? r.json() : null)
+  .then(d => {
+    const vs = d && Array.isArray(d.videos) ? d.videos.filter(v => /^[\w-]{6,}$/.test(v.id)) : [];
+    if (!vs.length) return;
+    const grid = document.getElementById('vgrid');
+    for (const v of vs){
+      const c = document.createElement('div');
+      c.className = 'vcard';
+      c.innerHTML = '<button type="button" class="vthumb"><img alt="" loading="lazy"><span class="vplay" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span></button><div class="t"></div><div class="m"></div>';
+      const btn = c.querySelector('button');
+      c.querySelector('img').src = './videos/' + v.id + '.jpg';
+      btn.setAttribute('aria-label', 'Reproducir: ' + v.titulo);
+      c.querySelector('.t').textContent = v.titulo;
+      c.querySelector('.m').textContent = v.fecha ? fmtFecha(v.fecha) : '';
+      btn.addEventListener('click', () => {
+        const f = document.createElement('iframe');
+        f.src = 'https://www.youtube-nocookie.com/embed/' + v.id + '?autoplay=1&rel=0';
+        f.title = v.titulo;
+        f.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
+        f.allowFullscreen = true;
+        btn.replaceChildren(f);
+      });
+      grid.appendChild(c);
+    }
+    if (d.canal) document.getElementById('vcanal').href = 'https://www.youtube.com/@profe.lucasramosuy';
+    document.getElementById('videos').classList.remove('hidden');
+  })
+  .catch(() => {});
 
 document.getElementById('buscar').addEventListener('input', e => render(e.target.value));
 </script>
