@@ -16,8 +16,11 @@ Sitio de materiales de clase de Lucas. Se publica como sitio estático; sin buil
 | `.pages.yml` | Campos y botones de Pages CMS. |
 | `.github/workflows/acciones-cms.yml` | Acciones manuales y aviso automático al guardar materiales. |
 | `scripts/acciones_cms.py` | Validación, optimización, Telegram y conversión a PDF. |
-| `scripts/videos_yt.py` | Actualiza los últimos 6 videos del canal de YouTube y descarga miniaturas locales. Sin API key ni dependencias. |
-| `.github/workflows/videos.yml` | Actualiza videos y miniaturas cada 6 horas o a pedido; commitea los cambios a `prod`. |
+| `docs/videos.json` | Salida automática (no editar a mano): los últimos 6 videos del canal y los destacados ya completados con título, fecha y miniatura. |
+| `docs/videos-destacados.json` | Los videos fijados. Se editan desde el panel (Pages CMS, "Videos destacados") pegando el link o el ID. |
+| `docs/videos/` | Miniaturas descargadas por el Action (el sitio no pide nada a YouTube hasta el clic). |
+| `scripts/videos_yt.py` | Arma `videos.json`: feed RSS del canal + destacados (feed u oEmbed). Sin API key ni dependencias. |
+| `.github/workflows/videos.yml` | Corre cada 6 horas, a pedido, y al guardar un destacado; commitea a `prod` solo si algo cambió. |
 
 ## Publicación
 
@@ -54,3 +57,9 @@ En Pages CMS, con la rama `prod` abierta, los cuatro botones aparecen en la barr
 - **Generar imprimible PDF:** pide el título exacto de un material ya guardado. Para DOCX, ODT, TXT y Markdown de texto simple aplica una plantilla A4 consistente, sin logo ni marca de agua; títulos, párrafos y listas fluyen entre páginas. Si el archivo contiene tablas, gráficos o campos, pide conservar su PDF original en vez de perderlos. PDF e imágenes mantienen su contenido y presentación; DOC/PPT antiguos se convierten sin remaquetar. El PDF queda como artefacto descargable del run por 7 días; otros formatos muestran un error claro; no se añade nada al sitio ni se envía a terceros.
 
 GitHub Actions tiene que estar habilitado. Pages CMS necesita permiso de Actions para lanzar botones; para el PR de imágenes, el repositorio tiene que permitir a GitHub Actions crear pull requests. Los botones son manuales y el aviso automático corre solo con cambios en materiales. Todo usa las cuotas gratuitas de un repo público.
+
+## Videos de YouTube
+
+La página principal muestra hasta 6 videos del canal @profe.lucasramosuy. Los **fijados** salen primero, con la marca "Fijado"; después van los últimos del canal, sin repetir los fijados, hasta completar 6. Si fijás 6, no entra ninguno automático. La sección se oculta sola si no hay videos. Los videos no cargan el reproductor de YouTube hasta que alguien hace clic en la miniatura.
+
+Para fijar uno: en Pages CMS, **Videos destacados**, agregá un item, pegá el link (o solo el ID) y guardá. En pocos minutos el workflow completa título y miniatura. Si un link está mal o el video es privado, se ignora y el workflow deja un aviso en su log. Para sacarlo de la lista, borrá el item. Las fechas solo se muestran para videos que están entre los últimos 15 del canal.
