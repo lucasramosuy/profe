@@ -72,6 +72,26 @@ content:
             label: Cuerpo
             type: rich-text
             required: true
+  - name: videos-destacados
+    label: Videos destacados
+    type: file
+    path: docs/videos-destacados.json
+    format: json
+    fields:
+      - name: videos
+        label: Videos fijados
+        description: "Aparecen primero en la sección Videos (hasta 6). Se completan solos, en unos minutos, con título y miniatura."
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{url}"
+        fields:
+          - name: url
+            label: Link o ID del video
+            type: string
+            required: true
+            description: "Pegá el link de YouTube (youtube.com/watch?v=..., youtu.be/... o /shorts/...) o solo el ID."
 
 # Acciones manuales de Pages CMS (el aviso a Telegram también sale al guardar).
 actions:
