@@ -16,7 +16,10 @@ import json
 import os
 import pathlib
 import re
+import socket
 import sys
+import time
+import urllib.error
 import urllib.parse
 import urllib.request
 import xml.etree.ElementTree as ET
@@ -26,6 +29,8 @@ FEED = os.environ.get("YT_FEED_URL", f"https://www.youtube.com/feeds/videos.xml?
 OEMBED = os.environ.get("YT_OEMBED_URL", "https://www.youtube.com/oembed")
 THUMB = os.environ.get("YT_THUMB_URL", "https://i.ytimg.com/vi/{id}/hqdefault.jpg")
 MAX_AUTO = 6
+MAX_INTENTOS_HTTP = 3
+ESPERAS_HTTP = (10, 30)
 MAX_PINNED = 6
 DOCS = pathlib.Path(__file__).resolve().parent.parent / "docs"
 NS = {"a": "http://www.w3.org/2005/Atom", "yt": "http://www.youtube.com/xml/schemas/2015"}
@@ -34,8 +39,22 @@ ID_RE = re.compile(r"^[A-Za-z0-9_-]{11}$")
 
 def get(url):
     req = urllib.request.Request(url, headers={"User-Agent": "profe-videos/1.0"})
-    with urllib.request.urlopen(req, timeout=30) as r:
-        return r.read()
+    for intento in range(MAX_INTENTOS_HTTP):
+        try:
+            with urllib.request.urlopen(req, timeout=30) as r:
+                return r.read()
+        except urllib.error.HTTPError as exc:
+            if exc.code not in (408, 429) and exc.code < 500:
+                raise
+            error = exc
+        except (urllib.error.URLError, TimeoutError, socket.timeout, ConnectionError) as exc:
+            error = exc
+
+        if intento == MAX_INTENTOS_HTTP - 1:
+            raise error
+        espera = ESPERAS_HTTP[intento]
+        print(f"::warning::Pedido HTTP fallido ({intento + 1}/{MAX_INTENTOS_HTTP}): {error}. Reintento en {espera}s.")
+        time.sleep(espera)
 
 
 def video_id(texto):
