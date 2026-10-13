@@ -2,7 +2,8 @@ name: PR de contenido del panel
 
 # Pages CMS no puede forzar PR: escribe en la rama que se elige en su selector.
 # Si en el panel se elige la rama `cms`, este workflow abre solo el PR cms -> prod
-# para revisar y mergear. Si el PR ya existe, no hace nada.
+# para revisar y mergear. Si el PR ya existe, o si cms no tiene cambios reales
+# respecto de prod, no hace nada.
 
 on:
   push:
@@ -16,7 +17,7 @@ jobs:
   abrir-pr:
     runs-on: ubuntu-latest
     steps:
-      - name: Abrir PR si no existe
+      - name: Abrir PR si no existe y hay cambios
         env:
           GH_TOKEN: ${{ github.token }}
           GH_REPO: ${{ github.repository }}
@@ -24,6 +25,11 @@ jobs:
           existente=$(gh pr list --head cms --base prod --state open --json number --jq '.[0].number')
           if [ -n "$existente" ]; then
             echo "Ya hay un PR abierto: #$existente"
+            exit 0
+          fi
+          archivos=$(gh api "repos/$GH_REPO/compare/prod...cms" --jq '.files | length')
+          if [ "$archivos" = "0" ]; then
+            echo "cms no tiene cambios respecto de prod, no se abre PR"
             exit 0
           fi
           gh pr create --head cms --base prod \
