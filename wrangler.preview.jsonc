@@ -1,0 +1,16 @@
+// Previews por PR con Cloudflare Workers Builds (el sitio real se publica con GitHub Pages, no con esto).
+// Comandos en Cloudflare:
+//   Build:   pnpm install --no-frozen-lockfile && pnpm build && rm -rf preview && mkdir -p preview && cp -r dist preview/profe && cp dist/404.html preview/404.html
+//   Deploy:  npx wrangler deploy -c wrangler.preview.jsonc
+//   Ramas que no son prod (versions): npx wrangler versions upload -c wrangler.preview.jsonc
+// Los assets se sirven bajo /profe/ para que los enlaces del sitio (/profe/...) funcionen igual que en producción.
+{
+  "name": "profe-preview",
+  "compatibility_date": "2026-09-27",
+  "assets": {
+    "directory": "./preview",
+    "not_found_handling": "404-page"
+  },
+  "workers_dev": true,
+  "preview_urls": true
+}
