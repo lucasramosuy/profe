@@ -77,8 +77,27 @@ def video_id(texto):
     return cand if ID_RE.match(cand) else None
 
 
+def pedir_feed():
+    """Pide el feed reintentando también el 404: YouTube lo devuelve de forma
+    intermitente para canales sin videos. Si persiste devuelve None."""
+    for intento in range(MAX_INTENTOS_HTTP):
+        try:
+            return get(FEED)
+        except urllib.error.HTTPError as exc:
+            if exc.code != 404:
+                raise
+            if intento == MAX_INTENTOS_HTTP - 1:
+                return None
+            espera = ESPERAS_HTTP[intento]
+            print(f"::warning::El feed devolvió 404 ({intento + 1}/{MAX_INTENTOS_HTTP}). Reintento en {espera}s.")
+            time.sleep(espera)
+
+
 def leer_feed():
-    root = ET.fromstring(get(FEED))
+    crudo = pedir_feed()
+    if crudo is None:
+        return None
+    root = ET.fromstring(crudo)
     out = []
     for e in root.findall("a:entry", NS):
         vid = e.findtext("yt:videoId", namespaces=NS)
@@ -124,6 +143,9 @@ def enriquecer(vid, feed_por_id):
 
 def main():
     feed = leer_feed()
+    if feed is None:
+        print("::warning::El feed sigue en 404 tras los reintentos (¿canal sin videos?). No se toca nada.")
+        return
     feed_por_id = {v["id"]: v for v in feed}
     auto = feed[:MAX_AUTO]
     destacados = [d for d in (enriquecer(i, feed_por_id) for i in leer_destacados()) if d]
