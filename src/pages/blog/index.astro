@@ -1,0 +1,40 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import '../../styles/blog.css';
+import { fechaCorta, ordenarPosts } from '../../lib/fechas';
+
+const posts = ordenarPosts(await getCollection('blog', ({ data }) => !data.borrador));
+---
+<Base title="Blog · Profe Lucas" description="Notas del profe: ideas, novedades de los materiales y cosas que voy probando en clase." canonical="https://lucasramos.uy/profe/blog/" col>
+<main class="wrap">
+  <div class="hero">
+    <span class="kicker">Blog</span>
+    <h1>Notas <em>del profe.</em></h1>
+    <p class="lede">Ideas, novedades de los materiales y cosas que voy probando en clase.</p>
+  </div>
+
+  {posts.length > 0 ? (
+    <div class="posts">
+      {posts.map(p => (
+        <article class="post">
+          <div class="fecha">{fechaCorta(p.data.fecha)}</div>
+          <div>
+            <h2 class="t"><a href={`/profe/blog/${p.id}/`}>{p.data.titulo}</a></h2>
+            {p.data.descripcion && <p class="d">{p.data.descripcion}</p>}
+            {p.data.etiquetas.length > 0 && (
+              <div class="tags">{p.data.etiquetas.map(t => <span class="tag">{t}</span>)}</div>
+            )}
+            <a class="leer" href={`/profe/blog/${p.id}/`}>Leer →</a>
+          </div>
+        </article>
+      ))}
+    </div>
+  ) : (
+    <div class="vacio">
+      <div class="big">Todavía no hay entradas.</div>
+      <p>Cuando escriba algo, aparece acá.</p>
+    </div>
+  )}
+</main>
+</Base>

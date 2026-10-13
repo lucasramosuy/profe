@@ -1,0 +1,74 @@
+---
+import '../styles/fonts.css';
+import '../styles/base.css';
+
+interface Props {
+  title: string;
+  description?: string;
+  canonical?: string;
+  nav?: { href: string; label: string; hideMobile?: boolean }[];
+  brand?: 'lucas' | 'profe';
+  col?: boolean;
+  noindex?: boolean;
+  og?: 'website' | 'article';
+}
+const {
+  title,
+  description,
+  canonical,
+  nav = [
+    { href: '/profe/#materiales', label: 'Materiales', hideMobile: true },
+    { href: '/profe/blog/', label: 'Blog' },
+    { href: 'https://lucasramos.uy/contacto/?tema=profe', label: 'Contacto', hideMobile: true },
+  ],
+  brand = 'lucas',
+  col = false,
+  noindex = false,
+  og = 'website',
+} = Astro.props;
+---
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{title}</title>
+{description && <meta name="description" content={description}>}
+{canonical && <link rel="canonical" href={canonical}>}
+{noindex && <meta name="robots" content="noindex">}
+<link rel="icon" href="/profe/favicon.svg" type="image/svg+xml">
+{!noindex && <meta property="og:type" content={og}>}
+{!noindex && <meta property="og:title" content={title}>}
+{!noindex && description && <meta property="og:description" content={description}>}
+{!noindex && canonical && <meta property="og:url" content={canonical}>}
+{!noindex && <meta name="twitter:card" content="summary">}
+<slot name="head" />
+</head>
+<body class={col ? 'col' : undefined}>
+
+<header>
+  <div class="wrap nav">
+    {brand === 'lucas'
+      ? <a class="brand" href="/profe/">lucas<span>.</span></a>
+      : <a class="brand" href="/profe/">Profe<em>.</em> Lucas</a>}
+    <nav class="nav-links">
+      {nav.map(l => <a href={l.href} class={l.hideMobile ? 'hide-m' : undefined}>{l.label}</a>)}
+    </nav>
+  </div>
+</header>
+
+<slot />
+
+<footer>
+  <div class="wrap foot">
+    <div>© 2026 Lucas · Profe</div>
+    <div class="links">
+      <a href="https://lucasramos.uy/">lucasramos.uy</a>
+      <a href="https://lucasramos.uy/normativa/">Normativa Uruguay</a>
+      <a href="https://lucasramos.uy/contacto/?tema=profe">Contacto</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

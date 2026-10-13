@@ -1,0 +1,38 @@
+.hero{padding:56px 0 72px;position:relative;overflow:hidden;width:100%;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.kicker{display:inline-block;font-size:13px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--terracotta-deep);border:1.5px solid var(--terracotta-deep);border-radius:999px;padding:6px 14px}
+.nf{position:relative;display:inline-block;margin:34px 0 6px}
+.nf-digits{font-family:Fraunces,serif;font-weight:700;font-size:clamp(110px,26vw,180px);line-height:.95;letter-spacing:-.02em}
+.nf-cero{position:relative;display:inline-block}
+.nf-ring{position:absolute;left:50%;top:50%;width:124%;height:124%;transform:translate(-50%,-52%) rotate(-4deg)}
+.nf-note{position:absolute;right:-64px;bottom:-46px;font-family:Fraunces,serif;font-style:italic;font-weight:600;font-size:27px;color:var(--terracotta-deep);transform:rotate(-6deg);white-space:nowrap}
+.nf-note svg{position:absolute;left:-58px;top:-16px;width:58px;height:44px}
+.nf-title{font-family:Fraunces,serif;font-weight:600;font-size:clamp(30px,6vw,44px);letter-spacing:-.02em;margin-top:34px}
+.nf-title em{font-style:italic;color:var(--terracotta)}
+.hero p.lede{font-size:19px;color:var(--ink-soft);max-width:40ch;margin:14px auto 0}
+.nf-actions{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:36px}
+.btn{display:inline-block;background:var(--terracotta-deep);color:#fff;font-weight:600;font-size:15px;border-radius:999px;padding:12px 26px}@media (hover:hover){.btn:hover{background:var(--terracotta)}}
+.btn-ghost{display:inline-block;border:1.5px solid var(--terracotta);color:var(--terracotta-deep);font-weight:600;font-size:15px;border-radius:999px;padding:12px 26px}@media (hover:hover){.btn-ghost:hover{background:var(--terracotta);border-color:var(--terracotta);color:#fff}}
+:focus-visible{outline:2px solid var(--terracotta-deep);outline-offset:3px;border-radius:4px}
+
+footer{padding:34px 0 44px;background:var(--chalk);color:#a99f8d;font-size:14px}
+.foot{display:flex;justify-content:space-between;align-items:center;border-top:1.5px solid #494236;padding-top:24px}@media (hover:hover){.foot a:hover{color:var(--paper)}}
+.foot .links{display:flex;gap:22px}
+.foot .links a{display:inline-block;padding:4px 0}
+
+@media (max-width:760px){
+  body{background:
+    linear-gradient(90deg, transparent 0, transparent 25px, rgba(168,62,32,.22) 25px, rgba(168,62,32,.22) 27px, transparent 27px),
+    repeating-linear-gradient(180deg, transparent 0, transparent 33px, rgba(36,27,18,.05) 33px, rgba(36,27,18,.05) 34px),
+    var(--paper);
+  }
+  .hero{padding:44px 0 64px}
+  .nav-links{gap:12px;font-size:14px}
+  .brand{font-size:20px}
+  .pill{padding:6px 12px;font-size:13px}
+  .nav-links a.hide-m{display:none}
+  .nf{margin:28px 0 4px}
+  .nf-note{right:-8px;bottom:-42px;font-size:22px}
+  .nf-note svg{left:-44px;top:-12px;width:46px;height:36px}
+  .nf-title{margin-top:30px}
+  .foot{flex-direction:column;gap:14px;text-align:center}
+}

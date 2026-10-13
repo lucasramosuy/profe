@@ -1,15 +1,16 @@
 # profe · lucasramos.uy/profe
 
-Sitio de materiales de clase de Lucas. Se publica como sitio estático; sin build ni dependencias.
+Sitio de materiales de clase de Lucas. Astro (pnpm) genera HTML estático; el contenido vive en Markdown y JSON del repo.
 
 ## Estructura
 
 | Archivo | Qué es |
 | --- | --- |
-| `docs/index.html` | La página pública. HTML/CSS/JS en un solo archivo. Carga `materiales.json` y muestra los materiales agrupados por curso, con buscador. Tipografías: Fraunces y Space Grotesk, servidas desde `docs/fonts/` (archivos de Fontsource; sin Google Fonts). |
-| `docs/materiales.json` | La lista de materiales. Se edita desde el panel (Pages CMS); no editar a mano. |
-| `docs/blog/` | El blog: listado (`index.html`) y detalle (`post.html`). Lee `blog.json` con JS y lo renderiza (parser de markdown chico, propio; sin dependencias). |
-| `docs/blog.json` | Las entradas del blog. Se editan desde el panel (Pages CMS); no editar a mano. |
+| `src/pages/` | Páginas: portada con buscador (`index.astro`), blog (`blog/`) y 404. Todo se genera a HTML en el build; no hay JavaScript para leer el contenido. |
+| `src/layouts/Base.astro`, `src/styles/` | Estructura común (cabecera, pie, fuentes) y estilos. |
+| `src/content/blog/*.md` | Las entradas del blog, una por archivo (Markdown con título, fecha, descripción y etiquetas). Se editan desde el panel (Pages CMS). Un `borrador: true` no se publica. |
+| `docs/materiales.json` | La lista de materiales. Se edita desde el panel (Pages CMS); no editar a mano. Se lee en el build. |
+| `docs/` | Carpeta pública de Astro (`publicDir`): se copia tal cual al sitio. Acá están `fonts/`, `archivos/`, `fotos/`, `videos/`, `favicon.svg`, `materiales.json` y `videos.json`. |
 | `docs/archivos/` | PDFs y otros archivos subidos desde el panel. |
 | `docs/fotos/` | Buscador de fotos para materiales (Unsplash vía el Worker `profe-fotos`, ver `worker/README.md`). |
 | `worker/` | Worker `profe-fotos` (`fotos.js` + `wrangler.fotos.toml`): proxy de la API de Unsplash para `/profe/fotos/api/*`. |
@@ -24,16 +25,17 @@ Sitio de materiales de clase de Lucas. Se publica como sitio estático; sin buil
 
 ## Publicación
 
-- **Producción:** https://lucasramos.uy/profe/ (vía Cloudflare Worker, que redirige `/profe/*` al upstream de este sitio).
-- La rama que se publica es `prod`, carpeta `docs/`.
-- Cada commit a `prod` republica el sitio en ~1 minuto.
+- **Producción:** https://lucasramos.uy/profe/ (vía Cloudflare Worker, que redirige `/profe/*` a GitHub Pages).
+- Cada push a `prod` corre `.github/workflows/deploy.yml`: `pnpm build` y publica `dist/` en GitHub Pages (Settings > Pages > Source: GitHub Actions). Tarda ~1 minuto.
+- El workflow de videos termina y vuelve a publicar.
+- Local (opcional): `pnpm install && pnpm dev`.
 - La rama `dev` tiene la plantilla vieja (AstroPaper); la que se publica es `prod`.
 
 ## Cómo escribir una entrada del blog
 
 1. Entrá a https://app.pagescms.org/ y abrí el proyecto `lucasramosuy/profe`.
 2. En **Blog**, agregá una entrada: título, fecha, descripción, etiquetas (separadas por comas) y cuerpo. El cuerpo es texto con formato: negrita, títulos, listas, citas, links e **imágenes** (el botón de imagen las sube a `docs/archivos/`).
-3. Guardá. La entrada aparece en https://lucasramos.uy/profe/blog/ en ~1 minuto.
+3. Guardá. Pages CMS crea `src/content/blog/<título>.md`; la entrada aparece en https://lucasramos.uy/profe/blog/ en ~1 minuto, con su propia página.
 
 ## Cómo subir un material
 

@@ -1,0 +1,147 @@
+---
+import Base from '../layouts/Base.astro';
+import '../styles/home.css';
+import { BADGE, materialesPorCurso, tipoDe, videos } from '../lib/datos';
+import { fechaLarga } from '../lib/fechas';
+
+const grupos = materialesPorCurso();
+const total = grupos.reduce((n, g) => n + g.docs.length, 0);
+const vids = videos();
+const desc = 'Materiales de clase de Lucas: apuntes, trípticos, presentaciones y guías para descargar.';
+---
+<Base
+  title="Profe · Lucas"
+  description={desc}
+  canonical="https://lucasramos.uy/profe/"
+  nav={[
+    { href: '#materiales', label: 'Materiales', hideMobile: true },
+    { href: '#cursos', label: 'Cursos', hideMobile: true },
+    { href: '/profe/blog/', label: 'Blog' },
+    { href: '/profe/fotos/', label: 'Fotos' },
+    { href: 'https://lucasramos.uy/contacto/?tema=profe', label: 'Contacto' },
+  ]}
+>
+<main class="wrap">
+
+  <div class="hero">
+    <svg class="squiggle" viewBox="0 0 200 200" fill="none" aria-hidden="true">
+      <circle cx="100" cy="100" r="88" stroke="#c8502e" stroke-width="3" stroke-dasharray="10 12"/>
+      <path d="M52 108c14-34 30-34 44 0s30 34 44 0" stroke="#e3a72f" stroke-width="4" stroke-linecap="round"/>
+    </svg>
+    <div class="hero-grid">
+      <div>
+        <span class="kicker">Materiales de clase</span>
+        <h1>Apuntes y recursos,<br><em>en un solo lugar.</em></h1>
+      </div>
+      <div>
+        <p class="lede">Los materiales que uso en clase: apuntes, trípticos, presentaciones y guías. Todo listo para descargar o imprimir.</p>
+      </div>
+    </div>
+
+    <div class="search" id="materiales">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#8a7b67" aria-hidden="true" stroke-width="2.4" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <label for="buscar" class="sr-only">Buscar materiales</label>
+      <input id="buscar" type="search" placeholder="Buscar por tema, curso o tipo de material…">
+    </div>
+  </div>
+
+  <div id="cursos">
+    {grupos.map(g => (
+      <section class="course" data-curso>
+        <div class="course-head"><h2>{g.curso}</h2><span class="count" data-count>{g.docs.length} documento{g.docs.length === 1 ? '' : 's'}</span></div>
+        {g.docs.map(m => {
+          const t = tipoDe(m.archivo);
+          return (
+            <a class="doc" href={m.archivo} data-texto={`${m.titulo} ${m.curso} ${m.descripcion || ''}`.toLowerCase()}>
+              <span class={`badge ${t}`}>{BADGE[t]}</span>
+              <span class="txt"><span class="t">{m.titulo}</span><div class="m">{m.meta}</div></span>
+              <span class="dl">Descargar ↓</span>
+            </a>
+          );
+        })}
+      </section>
+    ))}
+  </div>
+
+  {vids.length > 0 && (
+    <section class="videos" id="videos" aria-labelledby="videos-t">
+      <div class="course-head"><h2 id="videos-t">Videos</h2><span class="count">Del canal de YouTube</span></div>
+      <div class="vgrid">
+        {vids.map(v => (
+          <div class="vcard">
+            <button type="button" class="vthumb" data-video={v.id} data-titulo={v.titulo} aria-label={`Reproducir: ${v.titulo}`}>
+              <img src={`/profe/videos/${v.id}.jpg`} alt="" loading="lazy">
+              <span class="vplay" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
+            </button>
+            <div class="t">{v.titulo}</div>
+            <div class="m">{v.fijado && <span class="vpin">Fijado</span>}{v.fecha ? fechaLarga(v.fecha) : ''}</div>
+          </div>
+        ))}
+      </div>
+      <a class="vmore" href="https://www.youtube.com/@profe.lucasramosuy" rel="noopener">Ver el canal →</a>
+    </section>
+  )}
+
+  <div class:list={['vacio', { hidden: total !== 0 }]} id="vacio">
+    <div class="big">Todavía no hay materiales publicados.</div>
+    <p>En cuanto suba el primero desde el panel de edición, aparece acá automáticamente.</p>
+  </div>
+
+  <div class="vacio hidden" id="sin-resultados">
+    <div class="big">Nada coincide con esa búsqueda.</div>
+    <p>Probá con otra palabra o revisá el curso directamente.</p>
+  </div>
+
+</main>
+
+<section class="band">
+  <div class="wrap band-grid">
+    <div>
+      <h2>¿Sos estudiante o colega? <em>Llevatelos.</em></h2>
+      <p>Todos los materiales son de uso libre para estudiar y enseñar. Si algo te sirve en tu clase, descargalo y adaptalo; si encontrás un error, escribime y lo corrijo.</p>
+      <a class="btn" href="https://lucasramos.uy/contacto/?tema=profe">Escribirme →</a>
+    </div>
+    <div>
+      <p style="font-size:14px;color:#a99f8d">Cómo se mantiene este sitio</p>
+      <p style="margin-top:10px">Subo un archivo y se publica solo. Sin paneles raros: cada material nuevo aparece acá en un minuto, con su fecha y su curso.</p>
+    </div>
+  </div>
+</section>
+
+<script>
+  // Búsqueda: filtra lo que ya está en el HTML (no descarga nada).
+  const input = document.getElementById('buscar') as HTMLInputElement;
+  const cursos = Array.from(document.querySelectorAll<HTMLElement>('[data-curso]'));
+  const sinRes = document.getElementById('sin-resultados')!;
+  input.addEventListener('input', () => {
+    const q = input.value.trim().toLowerCase();
+    let visibles = 0;
+    for (const sec of cursos) {
+      const docs = Array.from(sec.querySelectorAll<HTMLElement>('.doc'));
+      let n = 0;
+      for (const d of docs) {
+        const ok = !q || (d.dataset.texto || '').includes(q);
+        d.classList.toggle('hidden', !ok);
+        if (ok) n++;
+      }
+      sec.classList.toggle('hidden', n === 0);
+      const c = sec.querySelector('[data-count]');
+      if (c) c.textContent = `${n} documento${n === 1 ? '' : 's'}`;
+      visibles += n;
+    }
+    sinRes.classList.toggle('hidden', !(cursos.length && !visibles));
+  });
+
+  // Videos: no se pide nada a YouTube hasta el clic.
+  document.querySelectorAll<HTMLButtonElement>('[data-video]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const f = document.createElement('iframe');
+      f.src = `https://www.youtube-nocookie.com/embed/${btn.dataset.video}?autoplay=1&rel=0`;
+      f.title = btn.dataset.titulo || '';
+      f.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
+      f.allowFullscreen = true;
+      btn.replaceChildren(f);
+    });
+  });
+</script>
+</Base>
