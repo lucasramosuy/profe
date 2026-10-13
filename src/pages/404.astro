@@ -1,0 +1,32 @@
+---
+import Base from '../layouts/Base.astro';
+import '../styles/404.css';
+---
+<Base
+  title="Página no encontrada"
+  noindex
+  col
+  brand="profe"
+  nav={[
+    { href: '/profe/#materiales', label: 'Materiales', hideMobile: true },
+    { href: '/profe/#cursos', label: 'Cursos', hideMobile: true },
+    { href: '/profe/blog/', label: 'Blog' },
+    { href: 'https://lucasramos.uy/contacto/?tema=profe', label: 'Contacto' },
+  ]}
+>
+<main class="wrap">
+  <div class="hero">
+    <span class="kicker">Página no encontrada</span>
+    <div class="nf" aria-hidden="true">
+      <span class="nf-digits">4<span class="nf-cero">0<svg class="nf-ring" viewBox="0 0 100 100" fill="none"><path d="M50 6C74 3 95 20 95 48 95 78 76 96 50 95 24 94 5 76 6 50 7 22 26 9 52 6" stroke="#c8502e" stroke-width="3.5" stroke-linecap="round"/></svg></span>4</span>
+      <span class="nf-note">no está<svg viewBox="0 0 60 46" fill="none" stroke="#a83e20" stroke-width="2.5" stroke-linecap="round"><path d="M54 42C44 34 30 26 16 16"/><path d="M24 17 15 14 18 23"/></svg></span>
+    </div>
+    <h1 class="nf-title">Esta página <em>no existe.</em></h1>
+    <p class="lede">Puede que el enlace esté mal escrito o que el material se haya movido.</p>
+    <div class="nf-actions">
+      <a class="btn" href="/profe/">Ir a los materiales →</a>
+      <a class="btn-ghost" href="https://app.pagescms.org/lucasramosuy/profe/prod/file/materiales">Abrir el panel</a>
+    </div>
+  </div>
+</main>
+</Base>
