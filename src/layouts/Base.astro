@@ -42,6 +42,7 @@ const {
 {!noindex && description && <meta property="og:description" content={description}>}
 {!noindex && canonical && <meta property="og:url" content={canonical}>}
 {!noindex && <meta name="twitter:card" content="summary">}
+<script src="/brand/kit/kit-remate.js" defer></script>
 <slot name="head" />
 </head>
 <body class={col ? 'col' : undefined}>
@@ -59,16 +60,12 @@ const {
 
 <slot />
 
-<footer>
-  <div class="wrap foot">
-    <div>© 2026 Lucas · Profe</div>
-    <div class="links">
-      <a href="https://lucasramos.uy/">lucasramos.uy</a>
-      <a href="https://lucasramos.uy/normativa/">Normativa Uruguay</a>
-      <a href="https://lucasramos.uy/contacto/?tema=profe">Contacto</a>
-    </div>
-  </div>
-</footer>
+<kit-remate
+  texto="© 2026 Lucas · Profe"
+  cta-href="https://lucasramos.uy/contacto/?tema=profe"
+  links="lucasramos.uy=https://lucasramos.uy/,Normativa Uruguay=https://lucasramos.uy/normativa/,Contacto=https://lucasramos.uy/contacto/?tema=profe"
+  arriba-href="#"
+></kit-remate>
 
 </body>
 </html>
