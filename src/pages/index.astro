@@ -7,15 +7,19 @@ import { fechaLarga } from '../lib/fechas';
 const grupos = materialesPorCurso();
 const total = grupos.reduce((n, g) => n + g.docs.length, 0);
 const vids = videos();
-const desc = 'Materiales de clase de Lucas: apuntes, trípticos, presentaciones y guías para descargar.';
+const desc = total > 0
+  ? 'Materiales de clase de Lucas: apuntes, trípticos, presentaciones y guías para descargar.'
+  : 'El espacio de materiales de clase de Lucas está en preparación. Explorá las herramientas educativas del sitio.';
 ---
 <Base
   title="Profe · Lucas"
   description={desc}
   canonical="https://lucasramos.uy/profe/"
   nav={[
-    { href: '#materiales', label: 'Materiales', hideMobile: true },
-    { href: '#cursos', label: 'Cursos', hideMobile: true },
+    ...(total > 0 ? [
+      { href: '#materiales', label: 'Materiales', hideMobile: true },
+      { href: '#cursos', label: 'Cursos', hideMobile: true },
+    ] : []),
     { href: '/profe/blog/', label: 'Blog' },
     { href: '/profe/fotos/', label: 'Fotos' },
     { href: 'https://lucasramos.uy/contacto/?tema=profe', label: 'Contacto' },
@@ -30,19 +34,25 @@ const desc = 'Materiales de clase de Lucas: apuntes, trípticos, presentaciones 
     </svg>
     <div class="hero-grid">
       <div>
-        <span class="kicker">Materiales de clase</span>
-        <h1>Apuntes y recursos,<br><em>en un solo lugar.</em></h1>
+        <span class="kicker">{total > 0 ? 'Materiales de clase' : 'Materiales en preparación'}</span>
+        {total > 0
+          ? <h1>Apuntes y recursos,<br><em>en un solo lugar.</em></h1>
+          : <h1>Un espacio para<br><em>compartir la clase.</em></h1>}
       </div>
       <div>
-        <p class="lede">Los materiales que uso en clase: apuntes, trípticos, presentaciones y guías. Todo listo para descargar o imprimir.</p>
+        <p class="lede">{total > 0
+          ? 'Los materiales que uso en clase: apuntes, trípticos, presentaciones y guías. Todo listo para descargar o imprimir.'
+          : 'Acá reuniré apuntes, trípticos, presentaciones y guías. Todavía no hay materiales publicados.'}</p>
       </div>
     </div>
 
+    {total > 0 && (
     <div class="search" id="materiales">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#8a7b67" aria-hidden="true" stroke-width="2.4" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
       <label for="buscar" class="sr-only">Buscar materiales</label>
       <input id="buscar" type="search" placeholder="Buscar por tema, curso o tipo de material…">
     </div>
+    )}
   </div>
 
   <div id="cursos">
@@ -82,10 +92,13 @@ const desc = 'Materiales de clase de Lucas: apuntes, trípticos, presentaciones 
     </section>
   )}
 
-  <div class:list={['vacio', { hidden: total !== 0 }]} id="vacio">
-    <div class="big">Todavía no hay materiales publicados.</div>
-    <p>En cuanto suba el primero desde el panel de edición, aparece acá automáticamente.</p>
-  </div>
+  {total === 0 && (
+    <section class="vacio" id="vacio" aria-labelledby="preparacion-t">
+      <h2 class="big" id="preparacion-t">Mientras tanto, hay herramientas para explorar.</h2>
+      <p>Podés probar los simuladores de aula y los tickets de entrada y salida del sitio.</p>
+      <a class="volver" href="/#proyectos">Explorar herramientas educativas →</a>
+    </section>
+  )}
 
   <div class="vacio hidden" id="sin-resultados">
     <div class="big">Nada coincide con esa búsqueda.</div>
@@ -94,6 +107,7 @@ const desc = 'Materiales de clase de Lucas: apuntes, trípticos, presentaciones 
 
 </main>
 
+{total > 0 && (
 <section class="band">
   <div class="wrap band-grid">
     <div>
@@ -107,13 +121,14 @@ const desc = 'Materiales de clase de Lucas: apuntes, trípticos, presentaciones 
     </div>
   </div>
 </section>
+)}
 
 <script>
   // Búsqueda: filtra lo que ya está en el HTML (no descarga nada).
-  const input = document.getElementById('buscar') as HTMLInputElement;
+  const input = document.getElementById('buscar') as HTMLInputElement | null;
   const cursos = Array.from(document.querySelectorAll<HTMLElement>('[data-curso]'));
   const sinRes = document.getElementById('sin-resultados')!;
-  input.addEventListener('input', () => {
+  input?.addEventListener('input', () => {
     const q = input.value.trim().toLowerCase();
     let visibles = 0;
     for (const sec of cursos) {
