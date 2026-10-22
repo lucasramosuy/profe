@@ -29,6 +29,7 @@ Sitio de materiales de clase de Lucas. Astro (pnpm) genera HTML estático; el co
 - Cada push a `prod` corre `.github/workflows/deploy.yml`: `pnpm build` y publica `dist/` en GitHub Pages (Settings > Pages > Source: GitHub Actions). Tarda ~1 minuto.
 - El workflow de videos termina y vuelve a publicar.
 - Local (opcional): `pnpm install && pnpm dev`.
+- `pnpm test` buildea una copia desechable con contenido de prueba y verifica que los materiales y videos de `docs/` lleguen al HTML (regresión de Astro 7: el frontmatter ya no puede leerlos con `import.meta.url`).
 - La rama `dev` tiene la plantilla vieja (AstroPaper); la que se publica es `prod`.
 
 ## Cómo escribir una entrada del blog

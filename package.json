@@ -6,10 +6,13 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "test": "node tests/estados-contenido.mjs"
+    "test": "node tests/datos-json.mjs && node tests/estados-contenido.mjs"
   },
   "dependencies": {
-    "astro": "5.18.2"
+    "astro": "7.4.2"
   },
-  "packageManager": "pnpm@10.18.0"
+  "packageManager": "pnpm@10.18.0",
+  "engines": {
+    "node": ">=22.23.4"
+  }
 }

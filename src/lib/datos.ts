@@ -1,9 +1,14 @@
 import { readFileSync } from 'node:fs';
+import { resolve } from 'node:path';
 import { fechaLarga } from './fechas';
 
+// Las rutas son relativas a la raíz del proyecto (cwd de `astro build` y `astro dev`).
+// No usar import.meta.url: en Astro 7 el frontmatter se ejecuta bundleado en
+// dist/.prerender/chunks y la lectura fallaba en silencio (catch -> null),
+// dejando materiales y videos vacíos aunque el JSON tenga contenido.
 function leerJson(ruta: string): any {
   try {
-    const txt = readFileSync(new URL(ruta, import.meta.url), 'utf8').trim();
+    const txt = readFileSync(resolve(process.cwd(), ruta), 'utf8').trim();
     return txt ? JSON.parse(txt) : null;
   } catch {
     return null;
@@ -25,7 +30,7 @@ export const BADGE: Record<Tipo, string> = { pdf: 'PDF', doc: 'DOC', ppt: 'PPT',
 
 // Materiales agrupados por curso, cada grupo ordenado por fecha (más nuevo primero).
 export function materialesPorCurso(): { curso: string; docs: (Material & { meta: string })[] }[] {
-  const d = leerJson('../../docs/materiales.json');
+  const d = leerJson('docs/materiales.json');
   const lista: Material[] = Array.isArray(d) ? d : (d?.materiales ?? []);
   const grupos = new Map<string, Material[]>();
   for (const m of lista) {
@@ -45,7 +50,7 @@ export function materialesPorCurso(): { curso: string; docs: (Material & { meta:
 }
 
 export function videos(): Video[] {
-  const d = leerJson('../../docs/videos.json');
+  const d = leerJson('docs/videos.json');
   if (!d) return [];
   const ok = (v: any) => v && /^[\w-]{6,}$/.test(v.id);
   const fijos: Video[] = (Array.isArray(d.destacados) ? d.destacados : []).filter(ok).slice(0, 6);

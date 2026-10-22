@@ -63,9 +63,14 @@ const {
 <kit-remate
   sufijo="Profe"
   cta-href="https://lucasramos.uy/contacto/?tema=profe"
-  links="Contacto=https://lucasramos.uy/contacto/?tema=profe"
+  links="Inicio=https://lucasramos.uy/,Todos los proyectos=https://lucasramos.uy/links/,Contacto=https://lucasramos.uy/contacto/?tema=profe"
   arriba-href="#"
 ></kit-remate>
+
+<style is:global>
+/* El pie conserva sus enlaces en móviles estrechos sin cambiar el kit compartido. */
+kit-remate::part(pie) { flex-wrap: wrap; }
+</style>
 
 </body>
 </html>
