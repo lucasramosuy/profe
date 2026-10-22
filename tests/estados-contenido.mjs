@@ -7,6 +7,9 @@ import { spawnSync } from 'node:child_process';
 
 // Build fixtures in a disposable copy; never rewrite CMS content in this checkout.
 const root = fileURLToPath(new URL('../', import.meta.url));
+// Bin de Astro resuelto desde su package.json: en Astro 5 es astro.js y en 7 bin/astro.mjs.
+const astroPkg = JSON.parse(readFileSync(join(root, 'node_modules/astro/package.json'), 'utf8'));
+const astroBin = join(root, 'node_modules/astro', astroPkg.bin.astro);
 const temp = mkdtempSync(join(tmpdir(), 'profe-content-'));
 try {
   for (const path of ['src', 'docs', 'astro.config.mjs', 'package.json']) {
@@ -18,7 +21,7 @@ try {
   mkdirSync(blogDir, { recursive: true });
   const fixturePost = (draft) => `---\ntitulo: Entrada de prueba\nfecha: 2026-10-20\ndescripcion: Contenido de prueba\nborrador: ${draft}\n---\nTexto de prueba.\n`;
   const build = () => {
-    const result = spawnSync(process.execPath, [join(root, 'node_modules/astro/astro.js'), 'build'], {
+    const result = spawnSync(process.execPath, [astroBin, 'build'], {
       cwd: temp, encoding: 'utf8', env: { ...process.env, ASTRO_TELEMETRY_DISABLED: '1' },
     });
     assert.equal(result.status, 0, result.stdout + result.stderr);
