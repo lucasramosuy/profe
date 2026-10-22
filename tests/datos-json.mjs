@@ -43,16 +43,14 @@ try {
   assert.match(home, /data-video="abcdefghijk"/);
   assert.match(home, /Video de prueba/);
   assert.match(home, /Fijado/);
-  assert.match(home, /class="vacio hidden" id="vacio"/);
-  // Con los JSON vacíos, el estado vacío queda visible y no hay videos.
+  // Con los JSON vacíos no queda rastro del contenido (el estado vacío en sí
+  // lo cubre tests/estados-contenido.mjs).
   writeFileSync(join(temp, 'docs/materiales.json'), '');
   writeFileSync(join(temp, 'docs/videos.json'), '{"destacados":[],"videos":[]}');
   home = build();
   assert.doesNotMatch(home, /Guía de prueba|data-video=/);
-  assert.match(home, /class="vacio" id="vacio"/);
-  assert.match(home, /Todavía no hay materiales publicados/);
   assert.ok(existsSync(join(temp, 'dist/index.html')));
-  console.log('OK: materiales y videos se leen desde docs/ en el build (y el estado vacío sigue funcionando).');
+  console.log('OK: materiales y videos se leen desde docs/ en el build.');
 } finally {
   rmSync(temp, { recursive: true, force: true });
 }
