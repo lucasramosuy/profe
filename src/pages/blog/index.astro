@@ -32,8 +32,9 @@ const posts = ordenarPosts(await getCollection('blog', ({ data }) => !data.borra
     </div>
   ) : (
     <div class="vacio">
-      <div class="big">Todavía no hay entradas.</div>
-      <p>Cuando escriba algo, aparece acá.</p>
+      <h2 class="big">Blog en preparación.</h2>
+      <p>Todavía no hay entradas publicadas. Mientras tanto, podés explorar los proyectos del sitio.</p>
+      <a class="volver" href="/links/">Ver todos los proyectos →</a>
     </div>
   )}
 </main>

@@ -6,7 +6,7 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "test": "node tests/datos-json.mjs"
+    "test": "node tests/datos-json.mjs && node tests/estados-contenido.mjs"
   },
   "dependencies": {
     "astro": "7.4.2"
