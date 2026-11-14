@@ -9,7 +9,7 @@
     "test": "node tests/datos-json.mjs && node tests/estados-contenido.mjs"
   },
   "dependencies": {
-    "astro": "7.4.2"
+    "astro": "7.4.7"
   },
   "packageManager": "pnpm@10.18.0",
   "engines": {
