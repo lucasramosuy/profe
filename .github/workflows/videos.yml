@@ -25,7 +25,9 @@ jobs:
       - run: python3 scripts/videos_yt.py
       - name: Commit si cambió
         run: |
-          git add docs/videos.json docs/videos
+          # Si el canal queda sin videos el script no genera salida: no fallar por rutas ausentes
+          git add -A docs/videos.json 2>/dev/null || true
+          git add -A docs/videos 2>/dev/null || true
           if git diff --cached --quiet; then
             echo "Sin cambios"
           else
